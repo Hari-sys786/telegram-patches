@@ -88,12 +88,27 @@ user keeps their own signer and can update installs in place.
                                              #    + patches-list.json, patches-bundle.json
 ```
 
-Morphe publishes the Gradle plugin (`app.morphe.patches`) and `app.morphe:morphe-patcher` only to
-GitHub Packages, which needs credentials with `packages:read`. This repo therefore vendors both
-upstreams and wires them in as composite builds:
+### Toolchain
 
-* `vendor/morphe-patches-gradle-plugin-1.3.4`
-* `vendor/morphe-patcher-1.11.0`
+Pinned to what the reference Morphe sources use, because the bundle **advertises its patcher
+version** in the manifest and Morphe refuses a bundle built for a newer patcher than it ships:
+
+| Component | Version |
+|---|---|
+| Gradle | 9.6.1 |
+| `app.morphe.patches` (Gradle plugin) | 1.3.3 |
+| `app.morphe:morphe-patcher` | **1.8.0** |
+
+Morphe publishes the plugin and the patcher only to GitHub Packages, which needs credentials with
+`packages:read`. This repo therefore vendors both upstreams (`tools/vendor-upstream.sh`) and wires
+them in as composite builds:
+
+* `vendor/morphe-patches-gradle-plugin-1.3.3`
+* `vendor/morphe-patcher-1.8.0`
+
+> The Gradle **wrapper** download can fail on networks that break TLS on redirects
+> (`SSLException: Unsupported or unrecognized SSL message`). Install the distribution manually if
+> that happens: download the zip with `curl`, unzip it, and run `gradle` from there.
 
 `gradle.properties` carries dummy `gpr.user`/`gpr.key` values because the plugin passes registry
 credentials through unconditionally; all real dependencies resolve from Maven Central / Google /
