@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-09-15T20:32:20.653440238",
+  "created_at": "2026-09-15T20:41:31.424260898",
   "description": "## [1.0.0](https://github.com/OWNER/telegram-patches/releases/tag/v1.0.0) (2026-09-15)\n\n### ✨ New Features\n\n* **Telegram:** first public release of the Morphe patch bundle, porting the `tgpatcher.py` feature\n  set to Morphe bytecode patches: signature-verification bypass, premium unlock (UserConfig +\n  Stories + PremiumPreviewFragment + premium-feature-available), download speed boost, upload speed\n  boost, forbidden-forward bypass, banned-channel access (both gates), media saving everywhere,\n  premium-locked content unlock, screenshots enabled, sponsored messages and proxy-sponsored\n  channels removed, secret media enabler, and the Cherrygram-style **Delete Account** dialog\n  (menu entry + 20s countdown + `account.deleteAccount` + logout).\n* **Telegram:** add the `Raise max account count` patch — `UserConfig.getMaxAccountCount()` returns\n  999 instead of the stock 3 (5 with premium).\n\n### ✨ 新功能\n\n* **Telegram:** 首个公开版本，将 `tgpatcher.py` 的功能移植为 Morphe bytecode patches：签名校验绕过、\n  Premium 解锁（UserConfig / Stories / PremiumPreviewFragment / premium-feature-available）、\n  下载加速、上传加速、禁止转发绕过、被封频道访问、随处保存媒体、解锁 Premium 锁定内容、启用截图、\n  去除赞助消息与代理赞助频道、Secret Media，以及 Cherrygram 风格的 **Delete Account** 对话框。\n* **Telegram:** 新增 `Raise max account count` patch：`UserConfig.getMaxAccountCount()` 返回 999。\n\n### ⚠️ Not included\n\n* Anti-messages-delete and AyuGram ghost mode are intentionally **not** part of this source.",
-  "download_url": "https://github.com/OWNER/telegram-patches/releases/download/v1.0.0/patches-1.0.0.mpp",
+  "download_url": "https://github.com/Hari-sys786/telegram-patches/releases/download/v1.0.0/patches-1.0.0.mpp",
   "signature_download_url": "",
   "version": "1.0.0"
 }
