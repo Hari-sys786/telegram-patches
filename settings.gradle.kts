@@ -8,7 +8,7 @@
  */
 pluginManagement {
     // Build the Gradle plugin from the vendored upstream source.
-    includeBuild("vendor/morphe-patches-gradle-plugin-1.3.4")
+    includeBuild("vendor/morphe-patches-gradle-plugin-1.3.3")
 
     repositories {
         mavenLocal()
@@ -27,13 +27,13 @@ pluginManagement {
 }
 
 plugins {
-    id("app.morphe.patches") version "1.3.4"
+    id("app.morphe.patches") version "1.3.3"
 }
 
 rootProject.name = "telegram-patches"
 
 // Substitute the published patcher with the vendored upstream source build.
-includeBuild("vendor/morphe-patcher-1.11.0") {
+includeBuild("vendor/morphe-patcher-1.8.0") {
     dependencySubstitution {
         substitute(module("app.morphe:morphe-patcher")).using(project(":"))
     }

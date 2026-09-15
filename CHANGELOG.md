@@ -1,3 +1,13 @@
+## [1.0.2](https://github.com/Hari-sys786/telegram-patches/compare/v1.0.1...v1.0.2) (2026-09-15)
+
+### 🐛 Bug Fixes
+
+* **Toolchain:** build the bundle against `morphe-patcher` **1.8.0** (Gradle 9.6.1, `app.morphe.patches`
+  plugin 1.3.3) instead of 1.11.0. The bundle manifest advertises its patcher version, and Morphe
+  refuses to load a bundle built for a newer patcher than the manager ships — the previous bundle
+  (`Patcher-Version: 1.11.0`) was therefore not offered by the manager at all. 1.8.0 matches the
+  reference Morphe sources that load correctly everywhere.
+
 ## [1.0.1](https://github.com/Hari-sys786/telegram-patches/compare/v1.0.0...v1.0.1) (2026-09-15)
 
 ### 🐛 Bug Fixes

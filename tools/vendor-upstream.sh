@@ -3,8 +3,8 @@
 # credentials. Versions must match the ones referenced by the build.
 set -euo pipefail
 
-PLUGIN_VERSION="${PLUGIN_VERSION:-1.3.4}"
-PATCHER_VERSION="${PATCHER_VERSION:-1.11.0}"
+PLUGIN_VERSION="${PLUGIN_VERSION:-1.3.3}"
+PATCHER_VERSION="${PATCHER_VERSION:-1.8.0}"
 PLUGIN_REPO="${PLUGIN_REPO:-MorpheApp/morphe-patches-gradle-plugin}"
 PATCHER_REPO="${PATCHER_REPO:-MorpheApp/morphe-patcher}"
 
