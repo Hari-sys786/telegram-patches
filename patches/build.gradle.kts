@@ -107,4 +107,15 @@ tasks.register<JavaExec>("generatePatchesList") {
 tasks.named<Jar>("jar") {
     exclude("app/patches/tg/VerifyMainKt*.class")
     exclude("app/patches/tg/PatchListGeneratorKt*.class")
+
+    // Ship the changelog inside the bundle so the .mpp is self-describing even before the source
+    // repository is published. (Morphe Manager reads version/changelog from patches-bundle.json in
+    // the source repo; this is the offline fallback.)
+    from(rootProject.layout.projectDirectory.file("CHANGELOG.md"))
+    manifest {
+        attributes(
+            "Patches-Count" to "20",
+            "Changelog" to "CHANGELOG.md",
+        )
+    }
 }
