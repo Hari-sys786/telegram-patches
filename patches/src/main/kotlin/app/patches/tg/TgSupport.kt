@@ -3,6 +3,7 @@ package app.patches.tg
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.BytecodePatchContext
+import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
@@ -48,17 +49,51 @@ import java.io.InputStreamReader
 /**
  * Telegram packages this patch set targets.
  *
- * Declaring concrete (non-universal) targets is what keeps the patches `default = true`:
- * Morphe forcibly downgrades universal patches (compatibility == null, or a target with a null
- * package name) to `default = false` at build time (PatchBuilder.resolveDefaultValue).
+ * Two things matter here:
  *
- * Versions are intentionally left unconstrained (null = any version) because every patch is
- * fingerprint-based, so it fails loudly instead of silently mis-patching on an unsupported build.
+ *  1. Declaring concrete (non-universal) targets keeps the patches `default = true` — Morphe
+ *     forcibly downgrades universal patches (compatibility == null, or a target with a null
+ *     package name) to `default = false` at build time (PatchBuilder.resolveDefaultValue).
+ *
+ *  2. Declaring a concrete *version* is what makes Morphe Manager treat this source as compatible
+ *     with the user's APK. With only an "any version" target the source reports `Any` and the
+ *     Manager falls back to expert mode with its own built-in universal patches instead of these.
+ *
+ * The verified build is Telegram **12.10.1 (versionCode 70389)**. Other versions are listed as an
+ * *experimental* target (null version), so they stay reachable without pretending to be verified —
+ * every patch is fingerprint-based and fails loudly instead of silently mis-patching.
  */
+const val TELEGRAM_VERIFIED_VERSION = "12.10.1"
+
+private fun telegramTargets(): List<AppTarget> = listOf(
+    AppTarget(
+        version = TELEGRAM_VERIFIED_VERSION,
+        description = "Verified build — all patches checked against this version.",
+    ),
+    AppTarget(
+        version = null,
+        isExperimental = true,
+        description = "Unverified version. Patches are fingerprint based: unsupported targets fail " +
+            "loudly instead of patching the wrong code.",
+    ),
+)
+
 val TG_COMPATIBILITY: Array<Compatibility> = arrayOf(
-    Compatibility(packageName = "org.telegram.messenger.web", name = "Telegram"),
-    Compatibility(packageName = "org.telegram.messenger", name = "Telegram"),
-    Compatibility(packageName = "org.telegram.messenger.beta", name = "Telegram Beta"),
+    Compatibility(
+        packageName = "org.telegram.messenger.web",
+        name = "Telegram",
+        targets = telegramTargets(),
+    ),
+    Compatibility(
+        packageName = "org.telegram.messenger",
+        name = "Telegram",
+        targets = telegramTargets(),
+    ),
+    Compatibility(
+        packageName = "org.telegram.messenger.beta",
+        name = "Telegram Beta",
+        targets = telegramTargets(),
+    ),
 )
 
 object TgSupport {

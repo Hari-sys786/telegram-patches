@@ -1,3 +1,13 @@
+## [1.0.1](https://github.com/Hari-sys786/telegram-patches/compare/v1.0.0...v1.0.1) (2026-09-15)
+
+### 🐛 Bug Fixes
+
+* **Compatibility:** declare the verified app version (Telegram `12.10.1`) as a concrete app target
+  instead of an unconstrained target. Morphe only treats a source as compatible when it can match the
+  app **version**, so the previous metadata reported `Any` and Morphe Manager fell back to expert mode
+  with its own built-in universal patches instead of this source. Unverified versions are now offered
+  as an *experimental* target.
+
 ## [1.0.0](https://github.com/OWNER/telegram-patches/releases/tag/v1.0.0) (2026-09-15)
 
 ### ✨ New Features
